@@ -1,0 +1,4 @@
+repository "HanWuDi@ssl://bigpekka@sh03-plasticscm.unity.cn:8787"
+  path "/"
+    smartbranch "/main/gutianyuan33" 
+     
