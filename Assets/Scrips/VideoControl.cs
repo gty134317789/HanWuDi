@@ -8,9 +8,10 @@ public class VideoControl : MonoBehaviour
 {
     private VideoPlayer videoplayer;
     private int currentClipIndex;//播放视频的序号
+    private TextMesh text_playorpause;//按钮的显示内容（播放/暂停）
     bool control;//判断人物是否在触发器内
 
-    public TextMesh text_playorpause;//按钮的显示内容（播放/暂停）
+    public GameObject text_play;//获取3dtext物体
     public VideoClip[] videoClips;//定义了一个数组用于存放视频资源
  
     void Start()
@@ -19,19 +20,12 @@ public class VideoControl : MonoBehaviour
         currentClipIndex = 0;
         videoplayer.clip = videoClips[currentClipIndex];//将序号0视频作为第一个播放的视频
         control = false;
+        text_playorpause = text_play.GetComponent<TextMesh>();//获取文字组件
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (control ==true)//若人物在触发器内，则功能启用
-        {
-            Control_1();
-            Control_2();
-            Control_3();
-        }
-    }
-    private void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)//判断人物是否在触发范围内
     {
         control = true;
     }
@@ -41,7 +35,7 @@ public class VideoControl : MonoBehaviour
         control = false;
 
     }
-    private void OnplayorpauseVideo()//
+    public void OnplayorpauseVideo()//
     {
         if (videoplayer.enabled == true)//判断是否有视频待播放
         {
@@ -60,7 +54,7 @@ public class VideoControl : MonoBehaviour
             }
         }
     }
-    private void OnpreVideo()//将待播放视频改为上个视频，并播放
+    public void OnpreVideo()//将待播放视频改为上个视频，并播放
     {
         currentClipIndex -= 1;
         if (currentClipIndex < 0)
@@ -71,28 +65,12 @@ public class VideoControl : MonoBehaviour
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
     }
-    private void OnnextVideo()//将待播放视频改为下个视频，并播放
+    public void OnnextVideo()//将待播放视频改为下个视频，并播放
     {
         currentClipIndex += 1;
         currentClipIndex = currentClipIndex % videoClips.Length;
         videoplayer.clip = videoClips[currentClipIndex];
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
-    }
-
-    public void Control_1()
-    {
-        if (Input.GetKeyUp(KeyCode.Alpha1))
-            OnplayorpauseVideo();
-    }
-    public void Control_2()
-    {
-        if (Input.GetKeyUp(KeyCode.Alpha2))
-            OnpreVideo();
-    }
-    public void Control_3()
-    {
-        if (Input.GetKeyUp(KeyCode.Alpha3))
-            OnnextVideo();
     }
 }

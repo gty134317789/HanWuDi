@@ -8,10 +8,14 @@ public class RayControl : MonoBehaviour
 {
     //定义一个transform类的tr
     public Transform tr;
+    public GameObject video_play;//获取播放面板物体
+
+    private VideoControl vc;
     void Start()
     {
         //获取tr的component，后面输出要用
         tr = GetComponent<Transform>();
+        vc = video_play.GetComponent<VideoControl>();//获取video player组件
     }
 
 
@@ -29,9 +33,21 @@ public class RayControl : MonoBehaviour
             RaycastHit hit;
             //判断射线是否与游戏对象相交
             //位置、向前、发出射线、2m
-            if (Physics.Raycast(tr.position, tr.forward, out hit, 2.0f))
+            if (Physics.Raycast(tr.position, tr.forward, out hit, 2.0f, LayerMask.GetMask("ColliderCube")))
             {
                 Debug.Log("射线击中:" + hit.collider.gameObject.name + "\n tag:" + hit.collider.tag);
+                if(hit.collider.gameObject.name== "Button_play")//判断射线是否碰撞了"播放/暂停"开关
+                {
+                    vc.OnplayorpauseVideo();
+                }
+                if (hit.collider.gameObject.name == "Button_pre")//判断射线是否碰撞了"上一个"开关
+                {
+                    vc.OnpreVideo();
+                }
+                if (hit.collider.gameObject.name == "Button_next")//判断射线是否碰撞了"下一个"开关
+                {
+                    vc.OnnextVideo();
+                }
             }
         }
     }
