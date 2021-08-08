@@ -52,7 +52,7 @@ public class DoorControl : MonoBehaviour
 
     }
 
-    //控制两次俺E的时间间隔
+    //控制两次按E的时间间隔
    //
    //
     public void ControlpushE()
