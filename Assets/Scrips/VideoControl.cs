@@ -13,6 +13,8 @@ public class VideoControl : MonoBehaviour
 
     public GameObject text_play;//获取3dtext物体
     public VideoClip[] videoClips;//定义了一个数组用于存放视频资源
+
+    public int Num = 0;//用来统计视频播放了几个，到达一定数量解锁
  
     void Start()
     {
@@ -21,6 +23,7 @@ public class VideoControl : MonoBehaviour
         videoplayer.clip = videoClips[currentClipIndex];//将序号0视频作为第一个播放的视频
         control = false;
         text_playorpause = text_play.GetComponent<TextMesh>();//获取文字组件
+        
     }
 
     // Update is called once per frame
@@ -43,13 +46,13 @@ public class VideoControl : MonoBehaviour
             {
                 videoplayer.Pause();
                 text_playorpause.text = "播放";
-                Debug.Log("2322");//用于调试脚本不能正常运行
+                //Debug.Log("2322");//用于调试脚本不能正常运行
 
             }
             else if (!videoplayer.isPlaying)
             {
                 videoplayer.Play();
-                Debug.Log("111");
+                //Debug.Log("111");
                 text_playorpause.text = "暂停";
             }
         }
@@ -64,6 +67,8 @@ public class VideoControl : MonoBehaviour
         videoplayer.clip = videoClips[currentClipIndex];
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
+        Num++;    //数量+1
+        //Debug.Log(Num);
     }
     public void OnnextVideo()//将待播放视频改为下个视频，并播放
     {
@@ -72,5 +77,7 @@ public class VideoControl : MonoBehaviour
         videoplayer.clip = videoClips[currentClipIndex];
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
+        Num ++;   //数量+1
+        //Debug.Log(Num);
     }
 }

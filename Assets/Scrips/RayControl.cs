@@ -10,12 +10,17 @@ public class RayControl : MonoBehaviour
     public Transform tr;
     public GameObject video_play;//获取播放面板物体
 
+    public GameObject Cloth;   //防护服
+    public GameObject Glove;   //防护手套
+
     private VideoControl vc;
     void Start()
     {
         //获取tr的component，后面输出要用
         tr = GetComponent<Transform>();
         vc = video_play.GetComponent<VideoControl>();//获取video player组件
+        Cloth = GameObject.Find("防护服");    //获取防护服
+        Glove = GameObject.Find("防护手套");  //获取防护手套
     }
 
 
@@ -47,6 +52,14 @@ public class RayControl : MonoBehaviour
                 if (hit.collider.gameObject.name == "Button_next")//判断射线是否碰撞了"下一个"开关
                 {
                     vc.OnnextVideo();
+                }
+                if (hit.collider.gameObject.name == "防护服")//判断射线是否碰撞了防护服，然后消失
+                {
+                    Cloth.SetActive(false);
+                }
+                if (hit.collider.gameObject.name =="防护手套")//判断射线是否碰撞了防护手套，然后消失
+                {
+                    Glove.SetActive(false);
                 }
             }
         }
