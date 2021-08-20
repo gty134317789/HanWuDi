@@ -22,6 +22,8 @@ public class CheckEquipment : MonoBehaviour
     Collider Sandpaper_2;   //砂纸2
     Collider Light;         //台灯
 
+    GameObject Button_StartWeld;//开始焊接按钮
+
     void Start()
     {
         
@@ -164,6 +166,12 @@ public class CheckEquipment : MonoBehaviour
                     Light = GameObject.Find("台灯").GetComponent<Collider>();
                     Light.enabled = false;
                     Debug.Log(ScoreOfCheck);
+                }
+                if (hit.collider.gameObject.name == "开始焊接按钮")
+                {
+                    Button_StartWeld= GameObject.Find("开始焊接按钮");
+                    Button_StartWeld.GetComponent<CameraControl>().enabled = true;
+                    Debug.Log("开始焊接");
                 }
             }
         }
