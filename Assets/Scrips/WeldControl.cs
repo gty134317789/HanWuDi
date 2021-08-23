@@ -19,16 +19,14 @@ public class WeldControl : MonoBehaviour
 
     private float m_Time = 0;//deltatime累加器
     private int meshNumber = 0;//已生成小球数
+    private bool mouse_control;//控制在脚本激活时鼠标点击功能才启用
+    private void Start()
+    {
+        mouse_control = true;
+    }
 
     void Update()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector3 mousePosOnScreen = Input.mousePosition;
-        mousePosOnScreen.z = screenPos.z;
-        Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);//获取鼠标的世界位置
-
-        transform.position = mousePosInWorld;//将空物体位置设为鼠标世界位置
-        transform.position= new Vector3(transform.position.x, -2.82f, transform.position.z);//高度设置为焊板高度，便于焊接操作
         if (isDragging)//长按鼠标时
         {
             m_Time += Time.deltaTime;
@@ -44,18 +42,24 @@ public class WeldControl : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isDragging = true;
-        particle.SetActive(true);//激活粒子效果
-        GameObject.Instantiate(prefab1, Vector3 .zero, prefab1.transform.rotation , testobject.transform);
-        //生成带有网格合并脚本的空物体克隆，负责存放单次长按生成的小球，位置为(0,0,0)，父物体为testobject
-        testobject.transform.GetChild(i).localScale = new Vector3(size, size, size);//改变空物体克隆的大小以改变子物体小球大小
+        if (mouse_control)
+        {
+            isDragging = true;
+            particle.SetActive(true);//激活粒子效果
+            GameObject.Instantiate(prefab1, Vector3.zero, prefab1.transform.rotation, testobject.transform);
+            //生成带有网格合并脚本的空物体克隆，负责存放单次长按生成的小球，位置为(0,0,0)，父物体为testobject
+            testobject.transform.GetChild(i).localScale = new Vector3(size, size, size);//改变空物体克隆的大小以改变子物体小球大小
+        }
     }
     private void OnMouseUp()
     {
-        isDragging = false;
-        particle.SetActive(false);//粒子效果
-        testobject.transform.GetChild(i).GetComponent<CombineMeshes>().enabled = true;//激活合并网格脚本
-        i++;//记录长按次数
+        if (mouse_control)
+        {
+            isDragging = false;
+            particle.SetActive(false);//粒子效果
+            testobject.transform.GetChild(i).GetComponent<CombineMeshes>().enabled = true;//激活合并网格脚本
+            i++;//记录长按次数
+        }
     }
     //public void ControlpushE()
     //{
@@ -70,6 +74,5 @@ public class WeldControl : MonoBehaviour
     //            PP.SetActive(false);
     //        num++;
     //    }
-
     //}
 }

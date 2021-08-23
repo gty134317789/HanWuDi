@@ -7,9 +7,7 @@ public class CameraControl : MonoBehaviour
 	public GameObject close1;
 	public GameObject close2;
 	public GameObject open1;
-    public GameObject PP;
-    int num = 0;
-    bool control_E = false;
+
 
     void Start() 
 	{

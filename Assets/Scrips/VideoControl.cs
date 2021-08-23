@@ -9,7 +9,7 @@ public class VideoControl : MonoBehaviour
     private VideoPlayer videoplayer;
     private int currentClipIndex;//播放视频的序号
     private TextMesh text_playorpause;//按钮的显示内容（播放/暂停）
-    bool control;//判断人物是否在触发器内
+    bool control = false;//判断人物是否在触发器内
 
     public GameObject text_play;//获取3dtext物体
     public VideoClip[] videoClips;//定义了一个数组用于存放视频资源
@@ -21,7 +21,6 @@ public class VideoControl : MonoBehaviour
         videoplayer = this.GetComponent<VideoPlayer>();//获取video player组件
         currentClipIndex = 0;
         videoplayer.clip = videoClips[currentClipIndex];//将序号0视频作为第一个播放的视频
-        control = false;
         text_playorpause = text_play.GetComponent<TextMesh>();//获取文字组件
         
     }
