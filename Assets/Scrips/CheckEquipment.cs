@@ -13,20 +13,33 @@ public class CheckEquipment : MonoBehaviour
     Collider Dashboard_1;  //仪表盘1
     Collider Dashboard_2;  //仪表盘2
     Collider Wire;  //电线
-    Collider Weldingrod_1;  //焊条1
-    Collider Weldingrod_2;  //焊条2
-    Collider Weldingrod_3;  //焊条3
-    Collider SteelPlate_1;  //钢板1
-    Collider SteelPlate_2;  //钢板2
-    Collider Sandpaper_1;   //砂纸1
-    Collider Sandpaper_2;   //砂纸2
+    GameObject Weldingrod_1;  //焊条1
+    GameObject Weldingrod_2;  //焊条2
+    GameObject Weldingrod_3;  //焊条3
+    GameObject SteelPlate_1;  //钢板1
+    GameObject SteelPlate_2;  //钢板2
+    GameObject Sandpaper_1;   //砂纸1
+    GameObject Sandpaper_2;   //砂纸2
     Collider Light;         //台灯
+
+    //定义两个数值，存放钢板数、焊条数和砂纸数
+    int NumOfWeldinggrod;
+    int NumOfSteelPlate;
+    int NumOfSandpaper;
 
     GameObject Button_StartWeld;//开始焊接按钮
 
+    //焊接前挑选的物品
+    public GameObject ToWeldingrod_1;  //待用焊条1
+    public GameObject ToWeldingrod_2;  //待用焊条2
+    public GameObject ToWeldingrod_3;  //待用焊条3
+    public GameObject ToSandpaper_1;   //待用砂纸1
+    public GameObject ToSandpaper_2;   //待用砂纸2
+
+
     void Start()
     {
-        
+       
     }
 
 
@@ -107,57 +120,69 @@ public class CheckEquipment : MonoBehaviour
                 if (hit.collider.gameObject.name == "焊条1")
                 {
                     ScoreOfCheck++;  //加1分
-                    Weldingrod_1 = GameObject.Find("焊条1").GetComponent<Collider>();
-                    Weldingrod_1.enabled = false;
+                    Weldingrod_1 = GameObject.Find("焊条1");
+                    Weldingrod_1.SetActive(false);
+                    ToWeldingrod_1.SetActive(true);
+                    NumOfWeldinggrod++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "焊条2")
                 {
                     ScoreOfCheck++;  //加1分
-                    Weldingrod_2 = GameObject.Find("焊条2").GetComponent<Collider>();
-                    Weldingrod_2.enabled = false;
+                    Weldingrod_2 = GameObject.Find("焊条2");
+                    Weldingrod_2.SetActive(false);
+                    ToWeldingrod_2.SetActive(true);
+                    NumOfWeldinggrod++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "焊条3")
                 {
                     ScoreOfCheck++;  //加1分
-                    Weldingrod_3 = GameObject.Find("焊条3").GetComponent<Collider>();
-                    Weldingrod_3.enabled = false;
+                    Weldingrod_3 = GameObject.Find("焊条3");
+                    Weldingrod_3.SetActive(false);
+                    ToWeldingrod_3.SetActive(true);
+                    NumOfWeldinggrod++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "焊板1")
                 {
                     ScoreOfCheck++;  //加1分
-                    SteelPlate_1 = GameObject.Find("焊板1").GetComponent<Collider>();
-                    SteelPlate_1.enabled = false;
+                    SteelPlate_1 = GameObject.Find("焊板1");
+                    SteelPlate_1.SetActive(false);
+                    NumOfSteelPlate++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "焊板2")
                 {
                     ScoreOfCheck++;  //加1分
-                    SteelPlate_2 = GameObject.Find("焊板2").GetComponent<Collider>();
-                    SteelPlate_2.enabled = false;
+                    SteelPlate_2 = GameObject.Find("焊板2");
+                    SteelPlate_2.SetActive(false);
+                    NumOfSteelPlate++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "砂纸1")
                 {
                     ScoreOfCheck++;  //加1分
-                    Sandpaper_1 = GameObject.Find("砂纸1").GetComponent<Collider>();
-                    Sandpaper_1.enabled = false;
+                    Sandpaper_1 = GameObject.Find("砂纸1");
+                    Sandpaper_1.SetActive(false);
+                    ToSandpaper_1.SetActive(true);
+                    NumOfSandpaper++;
                     Debug.Log(ScoreOfCheck);
                 }
 
                 if (hit.collider.gameObject.name == "砂纸2")
                 {
                     ScoreOfCheck++;  //加1分
-                    Sandpaper_2 = GameObject.Find("砂纸2").GetComponent<Collider>();
-                    Sandpaper_2.enabled = false;
-                    Debug.Log(ScoreOfCheck);
+                    Sandpaper_2 = GameObject.Find("砂纸2");
+                    Sandpaper_2.SetActive(false);
+                    ToSandpaper_2.SetActive(true);
+                    NumOfSandpaper++;
+                    Debug.Log(ScoreOfCheck.ToString() + NumOfSandpaper.ToString() + NumOfSteelPlate.ToString()+NumOfWeldinggrod.ToString()) ;
                 }
 
                 if (hit.collider.gameObject.name == "台灯")
@@ -176,4 +201,8 @@ public class CheckEquipment : MonoBehaviour
             }
         }
     }
+
+  
+
+
 }

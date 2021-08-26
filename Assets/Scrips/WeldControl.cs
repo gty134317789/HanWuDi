@@ -20,6 +20,9 @@ public class WeldControl : MonoBehaviour
     private float m_Time = 0;//deltatime累加器
     private int meshNumber = 0;//已生成小球数
     private bool mouse_control;//控制在脚本激活时鼠标点击功能才启用
+
+    
+
     private void Start()
     {
         mouse_control = true;
@@ -75,4 +78,7 @@ public class WeldControl : MonoBehaviour
     //        num++;
     //    }
     //}
+
+ 
+   
 }
