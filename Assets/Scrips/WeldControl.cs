@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class WeldControl : MonoBehaviour
 {
+
+    private Text m_MyText;           //字体组件
+
     public GameObject prefab;//预制体小球本体
     public GameObject particle;//粒子效果
     public GameObject prefab1;//存放每次长按预制体小球的空物体本体
@@ -20,12 +23,12 @@ public class WeldControl : MonoBehaviour
     private float m_Time = 0;//deltatime累加器
     private int meshNumber = 0;//已生成小球数
     private bool mouse_control;//控制在脚本激活时鼠标点击功能才启用
-
-    
-
     private void Start()
     {
         mouse_control = true;
+        GameObject root = GameObject.Find("Canvas");
+        m_MyText = root.transform.Find("Image/Text").GetComponent<Text>();
+        m_MyText.text = "鼠标点击进行焊接\n滑动滚轮可调整视角\n空格翻转物体";
     }
 
     void Update()
@@ -49,7 +52,10 @@ public class WeldControl : MonoBehaviour
         {
             isDragging = true;
             particle.SetActive(true);//激活粒子效果
+           
+            //GameObject.Instantiate(prefab1, Vector3.zero, prefab1.transform.rotation, testobject.transform);
             GameObject.Instantiate(prefab1, Vector3.zero, prefab1.transform.rotation, testobject.transform);
+    
             //生成带有网格合并脚本的空物体克隆，负责存放单次长按生成的小球，位置为(0,0,0)，父物体为testobject
             testobject.transform.GetChild(i).localScale = new Vector3(size, size, size);//改变空物体克隆的大小以改变子物体小球大小
         }
@@ -78,7 +84,4 @@ public class WeldControl : MonoBehaviour
     //        num++;
     //    }
     //}
-
- 
-   
 }

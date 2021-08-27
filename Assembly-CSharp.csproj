@@ -57,6 +57,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\EffectExamples\Misc Effects\Scripts\SpawnEffect.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Demoscene\Scripts\Rotate.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Demoscene\Scripts\demo.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\BulletCartridge.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\BulletShoot.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\CartridgeSpawnPoint.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\ShootSpawnPoint.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\SpotLight.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\SpotLightSpawnPoint.cs" />
+    <Compile Include="Assets\Gun\Reaper MachineGun\Source\Scripts\WeaponCtrl.cs" />
     <Compile Include="Assets\LeverLoader.cs" />
     <Compile Include="Assets\Move.cs" />
     <Compile Include="Assets\Scrips\CameraControl.cs" />
@@ -80,6 +89,7 @@
     <Compile Include="Assets\Scrips\Score_1.cs" />
     <Compile Include="Assets\Scrips\Splash_Screen.cs" />
     <Compile Include="Assets\Scrips\SwitchView.cs" />
+    <Compile Include="Assets\Scrips\Test_up_down.cs" />
     <Compile Include="Assets\Scrips\VideoControl.cs" />
     <Compile Include="Assets\Scrips\WeldControl.cs" />
     <Compile Include="Assets\Shared\Ramps\Runtime\RampAsset.cs" />

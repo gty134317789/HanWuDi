@@ -9,6 +9,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneManager_1 : MonoBehaviour
 {
@@ -18,9 +19,13 @@ public class SceneManager_1 : MonoBehaviour
     private GameObject videoplayer;  //获取视频播放器
     private DoorControl Point_2;     //定义第二层逻辑触发点
     public VideoControl num;         //获取计数器
+    private Text m_MyText;           //字体组件
     void Start()
     {
-        cloth=GameObject.Find("防护服");
+        GameObject root = GameObject.Find("Canvas");
+        m_MyText = root.transform.Find("Image/Text").GetComponent<Text>();
+        m_MyText.text = "穿戴好防护装备";
+        cloth = GameObject.Find("防护服");
         glove = GameObject.Find("防护手套");
         num = GameObject.Find("播放面板").GetComponent<VideoControl>();
         Point_2 = GameObject.Find("门").GetComponent<DoorControl>();
@@ -30,7 +35,7 @@ public class SceneManager_1 : MonoBehaviour
 
 
     void Update()
-    { 
+    {
         FirstPoint();    //先调用第一层逻辑
         SecondPoint();   //再调用第二层逻辑
         Debug.Log(num.Num);
@@ -41,6 +46,7 @@ public class SceneManager_1 : MonoBehaviour
     {
         if (!cloth.activeInHierarchy && !glove.activeInHierarchy)  //这个函数是检测面板里面的物体可用状态，挺好用的一个函数
         {
+            m_MyText.text = "观看视频";
             videoplayer.SetActive(true);
         }
     }
@@ -49,7 +55,8 @@ public class SceneManager_1 : MonoBehaviour
     {
         if (num.Num >= 2)
         {
-            Point_2.enabled=true;
+            m_MyText.text = "进入焊接室";
+            Point_2.enabled = true;
         }
     }
 }
