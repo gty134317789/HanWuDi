@@ -22,7 +22,7 @@ public class Test_up_down : MonoBehaviour
             //有SetFloat函数但没有SetInt函数，得用SetInteger。。。。
             ani.Play("New State");
             ani.SetBool("start", true);
-            if(num%2==1)
+            if (num % 2 == 1)
             {
                 ani.SetBool("choose", true);
             }
@@ -31,9 +31,9 @@ public class Test_up_down : MonoBehaviour
                 ani.SetBool("choose", false);
             }
             StartCoroutine(PlayerAttack());
-            
+
         }
-       
+
     }
     //private void start_animation()
     //{
@@ -42,8 +42,8 @@ public class Test_up_down : MonoBehaviour
     //}
     IEnumerator PlayerAttack()
     {
-       
-        
+
+
         yield return new WaitForSeconds(1.0f);
         // num=num+1;
         //ani.SetInteger("NewStart", num);
@@ -53,7 +53,7 @@ public class Test_up_down : MonoBehaviour
         //ani.SetInteger("NewStart", num);
         ani.SetBool("start", true);
         num++;
-       
+
         //ani.SetBool("start", false);
         //this.enabled = false;//禁用本脚本
     }
