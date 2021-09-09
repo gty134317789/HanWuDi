@@ -11,6 +11,7 @@ public class WeldControl : MonoBehaviour
     public GameObject particle;//粒子效果
     public GameObject prefab1;//存放每次长按预制体小球的空物体本体
     public GameObject testobject;//所有空物体的父空物体
+    public GameObject PP; //获取带有Postprocess volume组件的物体
     //public GameObject ironplate;//焊接用铁板
 
     public int maxNumber;//最大小球数
@@ -19,10 +20,13 @@ public class WeldControl : MonoBehaviour
 
     bool isDragging=false;//判断鼠标是否长按
     int i = 0;//记录长按次数
+    int num = 0;//记录按E次数
 
     private float m_Time = 0;//deltatime累加器
     private int meshNumber = 0;//已生成小球数
     private bool mouse_control;//控制在脚本激活时鼠标点击功能才启用
+
+   
     private void Start()
     {
         mouse_control = true;
@@ -44,6 +48,7 @@ public class WeldControl : MonoBehaviour
                 m_Time = 0;
             }
         }
+        ControlpushE();
     }
 
     private void OnMouseDown()
@@ -70,18 +75,15 @@ public class WeldControl : MonoBehaviour
             i++;//记录长按次数
         }
     }
-    //public void ControlpushE()
-    //{
-    //    int num = 0;
-    //    GameObject PP = GameObject.Find("PP");
-    //    if (Input.GetKeyUp(KeyCode.E))
-    //    {
-    //        Debug.Log("已点击" + num);
-    //        if (num % 2 == 0)
-    //            PP.SetActive(true);
-    //        else
-    //            PP.SetActive(false);
-    //        num++;
-    //    }
-    //}
+    public void ControlpushE()//按E激活或禁用PostProcessing
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {   
+            if (num % 2 == 0)
+                PP.SetActive(true);
+            else
+                PP.SetActive(false);
+            num++;
+        }
+    }
 }

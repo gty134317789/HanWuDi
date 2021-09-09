@@ -12,6 +12,6 @@ public class MousePosition : MonoBehaviour
         Vector3 mousePosInWorld = Camera.main.ScreenToWorldPoint(mousePosOnScreen);//得到鼠标的世界位置
 
         transform.position = mousePosInWorld;//将空物体位置设为鼠标世界位置
-        transform.position = new Vector3(transform.position.x, -2.82f, transform.position.z);//高度设置为焊板高度，便于焊接操作
+        transform.position = new Vector3(transform.position.x, -2.4696f, transform.position.z);//高度设置为焊板高度，便于焊接操作
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class MoveCamera : MonoBehaviour
 {
 
-    public float scrollSpeed = 10;//滑轮滚动速度
+    private float scrollSpeed = 0.5f;//滑轮滚动速度
     private Transform player;//主角的位置变量
     private Vector3 offsetPosition; //位置偏移
     private float distance = 0;//位置偏移的向量长度
 
-    public float dismix=0.5f;//摄像机距离最小值
-    public float dismax=1.5f;//摄像机距离最大值
+    private float dismix=0.35f;//摄像机距离最小值
+    private float dismax=0.6f;//摄像机距离最大值
 
     void Start()
     {

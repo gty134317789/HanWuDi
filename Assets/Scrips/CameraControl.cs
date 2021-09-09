@@ -20,5 +20,9 @@ public class CameraControl : MonoBehaviour
         GameObject root = GameObject.Find("Canvas");
         m_MyText = root.transform.Find("Image/Text").GetComponent<Text>();
         m_MyText.text = "滑动滚轮调整铁板间隙\n按E进入除杂";
+        GameObject ironplate_left = GameObject.Find("左焊板");
+        ironplate_left.GetComponent<MoveIronPlate>().enabled = true;
+        GameObject ironplate_right = GameObject.Find("右焊板");
+        ironplate_right.GetComponent<MoveIronPlate>().enabled = true;
     }
 }
