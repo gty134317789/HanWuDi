@@ -8,13 +8,14 @@ public class CheckEquipment : MonoBehaviour
     private Text m_MyText;           //字体组件
     public Transform tr;
     public int ScoreOfCheck; //存储清点设备阶段分数
+    public int ScoreOfBeforeWeld; //储存焊接前分数
     public Collider ElectricBox;  //电箱
     Collider WeldingTorch;  //焊枪
-    Collider WeldingClamp;  //夹子
+    GameObject WeldingClamp;  //夹子
     Collider WeldingMachine; //电焊机
     Collider Dashboard_1;  //仪表盘1
     Collider Dashboard_2;  //仪表盘2
-    Collider Wire;  //电线
+    GameObject Wire;  //电线
     GameObject Weldingrod_1;  //焊条1
     GameObject Weldingrod_2;  //焊条2
     GameObject Weldingrod_3;  //焊条3
@@ -23,6 +24,8 @@ public class CheckEquipment : MonoBehaviour
     GameObject Sandpaper_1;   //砂纸1
     GameObject Sandpaper_2;   //砂纸2
     Collider Light;         //台灯
+    Collider Switch;        //开关
+    Collider WireWelled;    //接好后的电线
 
     //定义两个数值，存放钢板数、焊条数和砂纸数
     int NumOfWeldinggrod;
@@ -70,6 +73,7 @@ public class CheckEquipment : MonoBehaviour
             if (Physics.Raycast(tr.position, tr.forward, out hit, 2.0f, LayerMask.GetMask("ColliderCube")))
             {
                 Debug.Log("射线击中:" + hit.collider.gameObject.name + "\n tag:" + hit.collider.tag);
+
                 //击中后识别目标，并进行加分逻辑
                 if (hit.collider.gameObject.name == "电箱")
                 {
@@ -96,8 +100,8 @@ public class CheckEquipment : MonoBehaviour
                 {
                     ScoreOfCheck++;  //加1分
                     num = ScoreOfCheck.ToString();
-                    WeldingClamp = GameObject.Find("夹子").GetComponent<Collider>();
-                    WeldingClamp.enabled = false;
+                    WeldingClamp = GameObject.Find("夹子");
+                    WeldingClamp.SetActive(false);
                     Debug.Log(ScoreOfCheck);
                     m_MyText.text = "夹子已清点\n" + num + "-15";
                 }
@@ -136,8 +140,8 @@ public class CheckEquipment : MonoBehaviour
                 {
                     ScoreOfCheck++;  //加1分
                     num = ScoreOfCheck.ToString();
-                    Wire = GameObject.Find("电线").GetComponent<Collider>();
-                    Wire.enabled = false;
+                    Wire = GameObject.Find("电线");
+                    Wire.SetActive(false);
                     Debug.Log(ScoreOfCheck);
                     m_MyText.text = "电线已清点\n" + num + "-15";
                 }
@@ -238,6 +242,40 @@ public class CheckEquipment : MonoBehaviour
                     Button_StartWeld = GameObject.Find("开始焊接按钮");
                     Button_StartWeld.GetComponent<CameraControl>().enabled = true;
                     Debug.Log("开始焊接");
+                }
+
+                //如果设备清点完，进入焊接前计分
+                if (ScoreOfCheck == 15 )
+                {
+
+                    if (hit.collider.gameObject.name == "开关底座") //打开开关
+                    {
+                        GameObject.Find("开关底座").GetComponent<HighlightableObject>().enabled = false;
+                        GameObject.Find("开关底座").GetComponent<Collider>().enabled = false;
+                        ScoreOfBeforeWeld++;
+                        Debug.Log(ScoreOfBeforeWeld+ScoreOfCheck);
+                    }
+
+                    if(hit.collider.gameObject.name == "夹子(夹好后)") //夹子接地
+                    {
+                        GameObject.Find("夹子(夹好后)").GetComponent<HighlightableObject>().enabled = false;
+                        GameObject.Find("夹子(夹好后)").GetComponent<Collider>().enabled = false;
+                        ScoreOfBeforeWeld++;
+                    }
+
+                    if (hit.collider.gameObject.name == "电线(接好状态)")  //接线
+                    {
+                        GameObject.Find("电线(接好状态)").GetComponent<HighlightableObject>().enabled = false;
+                        GameObject.Find("电线(接好状态)").GetComponent<Collider>().enabled = false;
+                        ScoreOfBeforeWeld++;
+                    }
+
+                    if(hit.collider.gameObject.name == "台灯开关") //打开台灯
+                    {
+                        GameObject.Find("台灯开关").GetComponent<HighlightableObject>().enabled = false;
+                        GameObject.Find("台灯开关").GetComponent<Collider>().enabled = false;
+                        ScoreOfBeforeWeld++;
+                    }
                 }
             }
         }
