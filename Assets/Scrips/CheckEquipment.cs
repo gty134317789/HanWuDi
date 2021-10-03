@@ -7,9 +7,9 @@ public class CheckEquipment : MonoBehaviour
 {
     private Text m_MyText;           //字体组件
     public Transform tr;
-    public int ScoreOfCheck; //存储清点设备阶段分数
-    public int ScoreOfBeforeWeld; //储存焊接前分数
-    public Collider ElectricBox;  //电箱
+    public int ScoreOfCheck=0; //存储清点设备阶段分数
+    public int ScoreOfBeforeWeld=0; //储存焊接前分数
+    private Collider ElectricBox;  //电箱
     Collider WeldingTorch;  //焊枪
     GameObject WeldingClamp;  //夹子
     Collider WeldingMachine; //电焊机
@@ -32,7 +32,7 @@ public class CheckEquipment : MonoBehaviour
     int NumOfSteelPlate;
     int NumOfSandpaper;
 
-    public string num;
+    private string num;
 
     GameObject Button_StartWeld;//开始焊接按钮
 
@@ -42,6 +42,8 @@ public class CheckEquipment : MonoBehaviour
     public GameObject ToWeldingrod_3;  //待用焊条3
     public GameObject ToSandpaper_1;   //待用砂纸1
     public GameObject ToSandpaper_2;   //待用砂纸2
+    public GameObject ToWeldingplate_1;//待用焊板1
+    public GameObject ToWeldingplate_2;//待用焊板2
 
     //private Text m_MyText;           //字体组件
 
@@ -188,6 +190,7 @@ public class CheckEquipment : MonoBehaviour
                     num = ScoreOfCheck.ToString();
                     SteelPlate_1 = GameObject.Find("焊板1");
                     SteelPlate_1.SetActive(false);
+                    ToWeldingplate_1.SetActive(true);
                     NumOfSteelPlate++;
                     Debug.Log(ScoreOfCheck);
                     m_MyText.text = "焊板1已清点\n" + num + "-15";
@@ -199,6 +202,7 @@ public class CheckEquipment : MonoBehaviour
                     num = ScoreOfCheck.ToString();
                     SteelPlate_2 = GameObject.Find("焊板2");
                     SteelPlate_2.SetActive(false);
+                    ToWeldingplate_2.SetActive(true);
                     NumOfSteelPlate++;
                     Debug.Log(ScoreOfCheck);
                     m_MyText.text = "焊板2已清点\n" + num + "-15";

@@ -55,7 +55,6 @@ public class MoveIronPlate : MonoBehaviour
         {
             GameObject Mouseposition  = GameObject.Find("鼠标世界位置");
             Mouseposition.GetComponent<DestroyImpurities>().enabled = true;//激活除杂脚本
-            m_MyText.text = "鼠标点击清除铁板上的杂质\n再次按E开始焊接";//修改提示
             this.enabled = false;//禁用本脚本
         }
     }
