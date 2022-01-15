@@ -85,22 +85,25 @@ public class WeldControl : MonoBehaviour
             particle.SetActive(false);//粒子效果
             testobject.transform.GetChild(i).GetComponent<CombineMeshes>().enabled = true;//激活合并网格脚本
             i++;//记录长按次数
-
-            if (light_pollution)//判断是否激活了光污染特效
-            {
-                PP2.SetActive(false);//关闭光污染特效
-                light_pollution = false;
-            }
+            PP2.SetActive(false);//关闭光污染特效
+            light_pollution = false;
         }
     }
     public void ControlpushE()//按E激活或禁用PostProcessing
     {
         if (Input.GetKeyDown(KeyCode.E))
-        {   
+        {
             if (num % 2 == 0)
+            {
                 PP1.SetActive(true);
+                PP2.SetActive(false);
+            }
             else
+            {
                 PP1.SetActive(false);
+                if(isDragging)
+                    PP2.SetActive(true);
+            }
             num++;
         }
     }

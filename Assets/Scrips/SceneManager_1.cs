@@ -17,7 +17,7 @@ public class SceneManager_1 : MonoBehaviour
     private GameObject cloth;        //获取防护服
     private GameObject glove;        //获取手套
     private GameObject videoplayer;  //获取视频播放器
-    private DoorControl Point_2;     //定义第二层逻辑触发点
+    public DoorControl Point_2;     //定义第二层逻辑触发点
     public VideoControl num;         //获取计数器
     private Text m_MyText;           //字体组件
     void Start()
@@ -28,7 +28,7 @@ public class SceneManager_1 : MonoBehaviour
         cloth = GameObject.Find("防护服");
         glove = GameObject.Find("防护手套");
         num = GameObject.Find("播放面板").GetComponent<VideoControl>();
-        Point_2 = GameObject.Find("门").GetComponent<DoorControl>();
+        //Point_2 = GameObject.Find("门").GetComponent<DoorControl>();
         videoplayer = GameObject.Find("播放面板");
         videoplayer.SetActive(false);            //一开始隐藏播放器
     }
