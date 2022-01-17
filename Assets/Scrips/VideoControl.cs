@@ -67,7 +67,7 @@ public class VideoControl : MonoBehaviour
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
         Num++;    //数量+1
-        //Debug.Log(Num);
+        Debug.Log(Num);
     }
     public void OnnextVideo()//将待播放视频改为下个视频，并播放
     {

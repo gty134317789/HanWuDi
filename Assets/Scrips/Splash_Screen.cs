@@ -33,7 +33,7 @@ public class Splash_Screen : MonoBehaviour
     }
     public void ChangeTheSence_1()
     {
-
+       
         SceneManager.LoadScene(1);
     }
 

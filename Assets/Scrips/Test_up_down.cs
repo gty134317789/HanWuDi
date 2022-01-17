@@ -18,6 +18,11 @@ public class Test_up_down : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
+            /*禁止焊接功能
+
+
+             */
+
             // ani.SetInteger("NewStart", num);
             //有SetFloat函数但没有SetInt函数，得用SetInteger。。。。
             ani.Play("New State");
@@ -52,9 +57,17 @@ public class Test_up_down : MonoBehaviour
         //num = num + 1;
         //ani.SetInteger("NewStart", num);
         ani.SetBool("start", true);
+
+        /*重启焊接功能
+
+        */
         num++;
 
         //ani.SetBool("start", false);
         //this.enabled = false;//禁用本脚本
+
+
+
+
     }
 }

@@ -38,7 +38,7 @@ public class SceneManager_1 : MonoBehaviour
     {
         FirstPoint();    //先调用第一层逻辑
         SecondPoint();   //再调用第二层逻辑
-        Debug.Log(num.Num);
+        //Debug.Log(num.Num);
     }
 
 

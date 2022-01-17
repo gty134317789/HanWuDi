@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CheckEquipment : MonoBehaviour
 {
+    public ScoreOfPrepareRoom scorebefore;
     private Text m_MyText;           //字体组件
     public Transform tr;
     public int ScoreOfCheck=0; //存储清点设备阶段分数
@@ -50,6 +51,8 @@ public class CheckEquipment : MonoBehaviour
 
     void Start()
     {
+        ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
+        Debug.Log("准备室的分数是："+ScoreOfCheck);
         GameObject root = GameObject.Find("Canvas");
         m_MyText=root.transform.Find("Image/Text").GetComponent<Text>();
         m_MyText.text = "点击物品清点15个设备\n点击按钮即可开始焊接";
@@ -79,7 +82,7 @@ public class CheckEquipment : MonoBehaviour
                 //击中后识别目标，并进行加分逻辑
                 if (hit.collider.gameObject.name == "电箱")
                 {
-                    ScoreOfCheck++;  //加1分
+                    ScoreOfCheck+=10;  //加1分
                     num = ScoreOfCheck.ToString();
                     ElectricBox = GameObject.Find("电箱").GetComponent<Collider>();
                     ElectricBox.enabled = false;
