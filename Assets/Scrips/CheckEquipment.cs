@@ -51,8 +51,8 @@ public class CheckEquipment : MonoBehaviour
 
     void Start()
     {
-        ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
-        Debug.Log("准备室的分数是："+ScoreOfCheck);
+        //ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
+        //Debug.Log("准备室的分数是："+ScoreOfCheck);
         GameObject root = GameObject.Find("Canvas");
         m_MyText=root.transform.Find("Image/Text").GetComponent<Text>();
         m_MyText.text = "点击物品清点15个设备\n点击按钮即可开始焊接";

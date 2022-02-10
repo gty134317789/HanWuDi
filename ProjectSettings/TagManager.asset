@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Fire
   - "\u6742\u8D28"
+  - reset
+  - quit
   layers:
   - Default
   - TransparentFX
