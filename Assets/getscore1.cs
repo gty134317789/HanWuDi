@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class getscore1 : MonoBehaviour
 {
     public int score;
+    private string scenename;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,9 @@ public class getscore1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score = GameObject.Find("FirstPersonCharacter").GetComponent<ScoreOfPrepareRoom>().scoreofprepareroom;
-        Debug.Log(score);
+        scenename = SceneManager.GetActiveScene().name;
+        if (scenename == "准备室" ) {
+            score = GameObject.Find("FirstPersonCharacter").GetComponent<ScoreOfPrepareRoom>().scoreofprepareroom;
+        }
     }
 }

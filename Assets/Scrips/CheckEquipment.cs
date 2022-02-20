@@ -51,8 +51,8 @@ public class CheckEquipment : MonoBehaviour
 
     void Start()
     {
-        //ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
-        //Debug.Log("准备室的分数是："+ScoreOfCheck);
+        ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
+        Debug.Log("准备室的分数是："+ScoreOfCheck);
         GameObject root = GameObject.Find("Canvas");
         m_MyText=root.transform.Find("Image/Text").GetComponent<Text>();
         m_MyText.text = "点击物品清点15个设备\n点击按钮即可开始焊接";
@@ -82,7 +82,7 @@ public class CheckEquipment : MonoBehaviour
                 //击中后识别目标，并进行加分逻辑
                 if (hit.collider.gameObject.name == "电箱")
                 {
-                    ScoreOfCheck+=10;  //加1分
+                    ScoreOfCheck+=1;  //加1分
                     num = ScoreOfCheck.ToString();
                     ElectricBox = GameObject.Find("电箱").GetComponent<Collider>();
                     ElectricBox.enabled = false;
@@ -252,37 +252,46 @@ public class CheckEquipment : MonoBehaviour
                 }
 
                 //如果设备清点完，进入焊接前计分
-                if (ScoreOfCheck == 15 )
+                if (ScoreOfCheck >= 19  )
                 {
 
-                    if (hit.collider.gameObject.name == "开关底座") //打开开关
+                    /*if (hit.collider.gameObject.name == "开关底座") //打开开关
                     {
                         GameObject.Find("开关底座").GetComponent<HighlightableObject>().enabled = false;
                         GameObject.Find("开关底座").GetComponent<Collider>().enabled = false;
                         ScoreOfBeforeWeld++;
                         Debug.Log(ScoreOfBeforeWeld+ScoreOfCheck);
-                    }
+                    }*/
 
                     if(hit.collider.gameObject.name == "夹子(夹好后)") //夹子接地
                     {
                         GameObject.Find("夹子(夹好后)").GetComponent<HighlightableObject>().enabled = false;
                         GameObject.Find("夹子(夹好后)").GetComponent<Collider>().enabled = false;
-                        ScoreOfBeforeWeld++;
+                        ScoreOfCheck++;
+                        num = ScoreOfCheck.ToString();
+                        m_MyText.text = "夹子已接地\n"  ;
                     }
 
                     if (hit.collider.gameObject.name == "电线(接好状态)")  //接线
                     {
                         GameObject.Find("电线(接好状态)").GetComponent<HighlightableObject>().enabled = false;
                         GameObject.Find("电线(接好状态)").GetComponent<Collider>().enabled = false;
-                        ScoreOfBeforeWeld++;
+                        ScoreOfCheck++;
+                        num = ScoreOfCheck.ToString();
+                        m_MyText.text = "电线已接地\n" ;
                     }
 
                     if(hit.collider.gameObject.name == "台灯开关") //打开台灯
                     {
                         GameObject.Find("台灯开关").GetComponent<HighlightableObject>().enabled = false;
                         GameObject.Find("台灯开关").GetComponent<Collider>().enabled = false;
-                        ScoreOfBeforeWeld++;
+                        ScoreOfCheck++;
+                        num = ScoreOfCheck.ToString();
+                        m_MyText.text = "台灯已打开\n" ;
                     }
+                }
+                if (ScoreOfCheck == 22) {
+                    m_MyText.text = "可以开始焊接\n" ;
                 }
             }
         }
