@@ -20,10 +20,10 @@ public class WeldControl : MonoBehaviour
     public GameObject open2;
     public GameObject destory1;
 
-    public int maxNumber=50;//最大小球数（每个子物体存放克隆小球数）
-    public int maxSpeed=30;//鼠标最大移动速度
+    public int maxNumber = 50;//最大小球数（每个子物体存放克隆小球数）
+    public int maxSpeed = 30;//鼠标最大移动速度
     public float timeInterval;//生成小球的间隔时间
-    public float size=0.6f; //预制体小球大小
+    public float size = 0.6f; //预制体小球大小
 
     int i = 0;//记录长按次数
     int num_reset = 3;//记录剩余复位次数
@@ -55,7 +55,7 @@ public class WeldControl : MonoBehaviour
         GameObject screenshot = GameObject.Find("焊缝判别辅助Cube");
 
 
-    button_iron.SetActive(true);//显示复位按钮和退出按钮
+        button_iron.SetActive(true);//显示复位按钮和退出按钮
 
         //初始化生成父物体与第一个子物体，并调整该子物体大小
         testobject = GameObject.Instantiate(prefab1, Vector3.zero, prefab1.transform.rotation, fatherobject.transform);
@@ -86,7 +86,7 @@ public class WeldControl : MonoBehaviour
                 //生成小球克隆在鼠标当前世界位置，随机角度,父物体为负责管理当次长按的空物体克隆
                 m_Time = 0;
             }
-            if(meshNumber > maxNumber)//第i个子物体下的小球数达到最大值
+            if (meshNumber > maxNumber)//第i个子物体下的小球数达到最大值
             {
                 testobject.transform.GetChild(i).GetComponent<CombineMeshes>().enabled = true;//激活合并网格脚本
                 GameObject.Instantiate(prefab1, Vector3.zero, prefab1.transform.rotation, testobject.transform);
@@ -113,10 +113,10 @@ public class WeldControl : MonoBehaviour
         else
             mouse_range = true;
 
-        if (mouse_speed<maxSpeed&&mouse_range)//鼠标速度合适且位置合适，即移动符合规范
+        if (mouse_speed < maxSpeed && mouse_range)//鼠标速度合适且位置合适，即移动符合规范
         {
             mouse_move = true;
-            if(isDragging)
+            if (isDragging)
                 particle.SetActive(true);//启用可能被本函数禁止的焊接特效
 
         }
@@ -129,12 +129,12 @@ public class WeldControl : MonoBehaviour
     private void MouseDown()//鼠标点下触发函数，功能：点击鼠标触发粒子效果和可能的光污染特效
                             //isDragging 鼠标是否按下 
     {
-        if (mouse_control&& Input.GetMouseButtonDown(0)&&mouse_move)
+        if (mouse_control && Input.GetMouseButtonDown(0) && mouse_move)
         {
             isDragging = true;
             particle.SetActive(true);//激活粒子效果
 
-            if((num%2)==0)//判断是否没戴面罩就焊接
+            if ((num % 2) == 0)//判断是否没戴面罩就焊接
             {
                 PP2.SetActive(true);//激活光污染特效
             }
@@ -142,7 +142,7 @@ public class WeldControl : MonoBehaviour
     }
     private void MouseUp()
     {
-        if (isDragging&& Input.GetMouseButtonUp(0))
+        if (isDragging && Input.GetMouseButtonUp(0))
         {
             isDragging = false;
             particle.SetActive(false);//粒子效果
@@ -161,7 +161,7 @@ public class WeldControl : MonoBehaviour
             else
             {
                 PP1.SetActive(false);
-                if(isDragging&&mouse_move)
+                if (isDragging && mouse_move)
                     PP2.SetActive(true);
             }
             num++;
@@ -200,7 +200,7 @@ public class WeldControl : MonoBehaviour
 
     void ResetIron()//复位焊板功能，功能：删除已有的所有焊接小球并重新初始化、最多复位三次
     {
-        if(isResetting && Input.GetMouseButtonDown(0)&& num_reset>0)//鼠标在复位按钮内点击，且存在复位次数
+        if (isResetting && Input.GetMouseButtonDown(0) && num_reset > 0)//鼠标在复位按钮内点击，且存在复位次数
         {
             //Debug.Log("Reset Iron");
 
@@ -214,19 +214,21 @@ public class WeldControl : MonoBehaviour
             testobject.transform.GetChild(i).localScale = new Vector3(size, size, size);
         }
     }
-    void QuitWeld() 
+    void QuitWeld()
     {
         if (isQuiting && Input.GetMouseButtonDown(0))
         {
             //关闭部分功能及组件
             PP1.SetActive(false);
             PP2.SetActive(false);
+            fatherobject.GetComponent<Test_up_down>().Getphoto();
             fatherobject.GetComponent<Test_up_down>().enabled = false;
 
             //拍照计算空隙
             screenshot.SetActive(true);
-            screenshot.GetComponent<ScreenShot>().enabled = true;
+            //screenshot.GetComponent<ScreenShot>().enabled = true;
             screenshot.GetComponent<ChangeJPG>().enabled = true;
+
 
             //激活准星及人物
             open1.SetActive(true);
@@ -234,7 +236,7 @@ public class WeldControl : MonoBehaviour
             Cursor.visible = false;
 
             //销毁焊接组件，延时1s（用于拍照计算）
-            Destroy(destory1,1.0f);
+            Destroy(destory1, 1.0f);
         }
     }
 }

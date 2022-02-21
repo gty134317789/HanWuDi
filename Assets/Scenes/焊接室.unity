@@ -8484,7 +8484,6 @@ GameObject:
   - component: {fileID: 1254398611}
   - component: {fileID: 1254398610}
   - component: {fileID: 1254398609}
-  - component: {fileID: 1254398612}
   - component: {fileID: 1254398613}
   m_Layer: 0
   m_Name: "\u710A\u7F1D\u5224\u522B\u8F85\u52A9Cube"
@@ -8567,20 +8566,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1254398607}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1254398612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1254398607}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 756d43a2ad2d1e24b99dda59e42b6dcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 674358824}
-  uiCamera: {fileID: 674358824}
 --- !u!114 &1254398613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12918,6 +12903,9 @@ MonoBehaviour:
   PP1: {fileID: 1980197650}
   PP2: {fileID: 644218772}
   button_iron: {fileID: 1883939633}
+  screenshot: {fileID: 1254398607}
+  mainCamera: {fileID: 674358824}
+  uiCamera: {fileID: 674358824}
 --- !u!4 &1880240920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 210031107852664787, guid: 3ceecab8286af0e4d95ffac9a4203c39,
