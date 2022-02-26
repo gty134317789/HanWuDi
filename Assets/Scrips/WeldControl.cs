@@ -25,13 +25,19 @@ public class WeldControl : MonoBehaviour
     public float timeInterval;//生成小球的间隔时间
     public float size = 0.6f; //预制体小球大小
 
+    public int num_pp2 = 0;//记录光污染特效次数
+    public float n_Time = 0;//deltatime累加器，用于记录鼠标不规范使用时间
+
+
+    Vector3 v1;//当前位置
+    float x1, x2, z1, z2;//鼠标可以移动的范围
     int i = 0;//记录长按次数
     int num_reset = 3;//记录剩余复位次数
-    int num = 0;//记录按E次数
-    Vector3 v1;//当前位置
+    int num_e = 0;//记录按E次数
 
-    private float m_Time = 0;//deltatime累加器
+    private float m_Time = 0;//deltatime累加器，用于记录小球生成间隔
     private int meshNumber = 0;//已生成小球数
+
     private bool mouse_control;//控制在脚本激活时鼠标点击功能才启用
     private bool mouse_move;//控制鼠标移动是否规范
     private bool mouse_range;//控制鼠标移动范围
@@ -53,8 +59,12 @@ public class WeldControl : MonoBehaviour
         m_MyText.text = "鼠标点击进行焊接\n滑动滚轮可调整视角\n空格翻转物体";
         fatherobject = GameObject.Find("焊板");
         GameObject screenshot = GameObject.Find("焊缝判别辅助Cube");
-
-
+        GameObject leftiron = GameObject.Find("左焊板");
+        GameObject rightiron = GameObject.Find("右焊板");
+        x1 = leftiron.transform.position.x + 0.1715f;
+        x2 = leftiron.transform.position.x - 0.1715f;
+        z1 = leftiron.transform.position.z - 0.1277f;
+        z2 = rightiron.transform.position.z + 0.1277f;
         button_iron.SetActive(true);//显示复位按钮和退出按钮
 
         //初始化生成父物体与第一个子物体，并调整该子物体大小
@@ -108,7 +118,7 @@ public class WeldControl : MonoBehaviour
 
         //Debug.Log("speed:"+mouse_speed);
 
-        if (v2.x > -11.470f || v2.x < -11.812f || v2.z > -3.472f || v2.z < -3.995f)//鼠标不在焊板范围内
+        if (v2.x > x1 || v2.x < x2 || v2.z < z1 || v2.z > z2)//鼠标不在焊板范围内
             mouse_range = false;
         else
             mouse_range = true;
@@ -122,6 +132,10 @@ public class WeldControl : MonoBehaviour
         }
         else
         {
+            if (mouse_speed >= maxSpeed && mouse_range && isDragging)//正常焊接时移动过快
+            {
+                n_Time += Time.deltaTime;
+            }
             mouse_move = false;
             particle.SetActive(false);//鼠标移动不符合规范则禁止焊接特效
         }
@@ -129,14 +143,15 @@ public class WeldControl : MonoBehaviour
     private void MouseDown()//鼠标点下触发函数，功能：点击鼠标触发粒子效果和可能的光污染特效
                             //isDragging 鼠标是否按下 
     {
-        if (mouse_control && Input.GetMouseButtonDown(0) && mouse_move)
+        if (mouse_control && Input.GetMouseButtonDown(0)&& mouse_range)
         {
             isDragging = true;
             particle.SetActive(true);//激活粒子效果
 
-            if ((num % 2) == 0)//判断是否没戴面罩就焊接
+            if ((num_e % 2) == 0)//判断是否没戴面罩就焊接
             {
                 PP2.SetActive(true);//激活光污染特效
+                num_pp2 ++;
             }
         }
     }
@@ -153,7 +168,7 @@ public class WeldControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (num % 2 == 0)
+            if (num_e % 2 == 0)
             {
                 PP1.SetActive(true);
                 PP2.SetActive(false);
@@ -162,9 +177,12 @@ public class WeldControl : MonoBehaviour
             {
                 PP1.SetActive(false);
                 if (isDragging && mouse_move)
+                { 
                     PP2.SetActive(true);
+                    num_pp2++;
+                }
             }
-            num++;
+            num_e++;
         }
     }
     void OnTriggerEnter(Collider other)
@@ -203,7 +221,7 @@ public class WeldControl : MonoBehaviour
         if (isResetting && Input.GetMouseButtonDown(0) && num_reset > 0)//鼠标在复位按钮内点击，且存在复位次数
         {
             //Debug.Log("Reset Iron");
-
+            n_Time = 0;
             Destroy(testobject.gameObject);
             num_reset--;
 
@@ -229,14 +247,15 @@ public class WeldControl : MonoBehaviour
             //screenshot.GetComponent<ScreenShot>().enabled = true;
             screenshot.GetComponent<ChangeJPG>().enabled = true;
 
-
             //激活准星及人物
             open1.SetActive(true);
             open2.SetActive(true);
             Cursor.visible = false;
 
+            fatherobject.GetComponent<GetScores>().GetScore();
+
             //销毁焊接组件，延时1s（用于拍照计算）
-            Destroy(destory1, 1.0f);
+            Destroy(destory1, 0.1f);
         }
     }
 }

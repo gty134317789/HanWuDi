@@ -21,7 +21,6 @@ public class DoorControl : MonoBehaviour
     {
         //得到第一个子物体的动画控件
         ani = transform.GetChild(0).GetComponent<Animation>();
-
     }
     //直接利用触发器来启动动画
     //private void OnTriggerEnter(Collider other)

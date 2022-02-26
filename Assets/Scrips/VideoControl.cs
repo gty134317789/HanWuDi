@@ -27,16 +27,16 @@ public class VideoControl : MonoBehaviour
 
     // Update is called once per frame
 
-    private void OnTriggerEnter(Collider other)//判断人物是否在触发范围内
-    {
-        control = true;
-    }
+    //private void OnTriggerEnter(Collider other)//判断人物是否在触发范围内
+    //{
+    //    control = true;
+    //}
 
-    private void OnTriggerExit(Collider other)
-    {
-        control = false;
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    control = false;
 
-    }
+    //}
     public void OnplayorpauseVideo()//
     {
         if (videoplayer.enabled == true)//判断是否有视频待播放
@@ -67,7 +67,7 @@ public class VideoControl : MonoBehaviour
         text_playorpause.text = "暂停";
         OnplayorpauseVideo();
         Num++;    //数量+1
-        Debug.Log(Num);
+        //Debug.Log(Num);
     }
     public void OnnextVideo()//将待播放视频改为下个视频，并播放
     {

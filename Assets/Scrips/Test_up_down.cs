@@ -80,14 +80,15 @@ public class Test_up_down : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isAni)
         {
-
-            Getphoto();//调用截图
-
             isAni = true;//动画播放中状态
             mouse_position.SetActive(false);//禁用鼠标世界位置物体
             PP1.SetActive(false);
             PP2.SetActive(false);//禁用特效
             button_iron.SetActive(false);//禁用按钮
+
+
+            Getphoto();//调用截图
+
 
             // ani.SetInteger("NewStart", num);
             //有SetFloat函数但没有SetInt函数，得用SetInteger。。。。

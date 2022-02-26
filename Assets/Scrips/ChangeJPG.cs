@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ChangeJPG : MonoBehaviour
 {
-
-
+    public int sum_point=0;
     void Start()
     {
         Debug.Log(Application.dataPath);
@@ -71,11 +70,12 @@ public class ChangeJPG : MonoBehaviour
             }
             Debug.Log("总像素点数" + b);
             Debug.Log("满足条件的像素点数" + a+" "+name);
-
+            sum_point += a;
             startTime = (double)Time.time - startTime;
             Debug.Log("总用时:" + startTime);
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
+            
 
         }
     }

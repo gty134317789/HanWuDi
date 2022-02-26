@@ -52,7 +52,7 @@ public class CheckEquipment : MonoBehaviour
     void Start()
     {
         ScoreOfCheck = GameObject.Find("上一场景的分数").GetComponent<getscore1>().score;
-        Debug.Log("准备室的分数是："+ScoreOfCheck);
+        Debug.Log("准备室的分数是：" + ScoreOfCheck);
         GameObject root = GameObject.Find("Canvas");
         m_MyText=root.transform.Find("Image/Text").GetComponent<Text>();
         m_MyText.text = "点击物品清点15个设备\n点击按钮即可开始焊接";
@@ -68,14 +68,14 @@ public class CheckEquipment : MonoBehaviour
         {
             //在Scene视图里面发射一条可视化射线
             //参数为tr的位置，tr方向向前，绿色
-            Debug.DrawRay(tr.position, tr.forward * 2.0f, Color.green);
+            Debug.DrawRay(tr.position, tr.forward * 3.0f, Color.green);
             //创建从摄像机发射到鼠标位置的射线，ray是起点，input是鼠标的坐标
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             RaycastHit hit;
             //判断射线是否与游戏对象相交
-            //位置、向前、发出射线、2m
-            if (Physics.Raycast(tr.position, tr.forward, out hit, 2.0f, LayerMask.GetMask("ColliderCube")))
+            //位置、向前、发出射线、3m
+            if (Physics.Raycast(tr.position, tr.forward, out hit, 3.0f, LayerMask.GetMask("ColliderCube")))
             {
                 Debug.Log("射线击中:" + hit.collider.gameObject.name + "\n tag:" + hit.collider.tag);
 
